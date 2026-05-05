@@ -7,9 +7,11 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+coverage
 node_modules
 dist
 dist-ssr
+.env
 *.local
 
 # Editor directories and files
@@ -24,4 +26,10 @@ dist-ssr
 *.sw?
 
 # Claude Code local settings
-.claude/settings.local.json
+.claude
+CLAUDE.md
+.gemini
+.geminiignore
+GEMINI.md
+.github
+instructions
