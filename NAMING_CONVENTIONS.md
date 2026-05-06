@@ -12,37 +12,7 @@ The goal is to optimize for:
 - predictable colocation of tests, styles and helpers
 - consistency across packages
 
-## Core Rule
-
-Implementation files should have explicit names.
-
-`index.js` should be used only for:
-
-- package entrypoints
-- folder entrypoints
-- barrel files
-- public API aggregation
-
-So this is preferred:
-
-```text
-filter-button/
-	index.js
-	FilterButton.js
-	FilterButton.module.scss
-	FilterButton.test.js
-```
-
-And this is discouraged for implementation:
-
-```text
-filter-button/
-	index.js
-```
-
-## Directory Naming
-
-Use **kebab-case** for directories:
+## Directory Naming - kebab-case
 
 ```text
 filter-button/
@@ -51,27 +21,16 @@ date-picker/
 row-action/
 ```
 
-This keeps paths readable and consistent across platforms and tooling.
-
 ## File Naming by Type
 
-### React components and containers
+### React components and containers: PascalCase.jsx or PascalCase.tsx
 
-Use **PascalCase.js** for implementation files:
+file name and exported component names should match
 
 ```text
-FilterButton.js
-PortalContainer.js
-Pagination.js
-EntitiesImport.js
+FilterButton.jsx
+PortalContainer.tsx
 ```
-
-Rules:
-
-- the file name should match the exported component name
-- if the component is the main module in a folder, keep a local `index.js` barrel next to it
-
-Example:
 
 ```javascript
 function FilterButton( props ) {
@@ -83,7 +42,8 @@ export default React.memo( FilterButton );
 
 ### Hooks
 
-Use **camelCase** with a `use` prefix:
+**camelCase** with a `use` prefix:
+- the file name should match the exported hook name
 
 ```text
 usePortalPosition.js
@@ -91,14 +51,9 @@ useVirtualList.js
 useOnOutsideClick.js
 ```
 
-Rules:
+### Utilities
 
-- hooks must start with `use`
-- the file name should match the exported hook name
-
-### Helpers and utilities
-
-Use **camelCase.{utility name}.js**:
+**camelCase.{utility name}.js**:
 
 ```text
 global.helper.js
@@ -106,47 +61,16 @@ sport.mapper.js
 filter.constant.js
 region.controller.js
 competition.selector.js
+withPortal.hoc.js
+portal.context.js
+portal.provider.js
 ```
 
 If the helper is a singleton or module object, the file name should still reflect the exported symbol.
 
-### Context
-
-Use names that match the exported React context or provider:
-
-```text
-PortalContext.js
-PortalProvider.js
-usePortalContext.js
-```
-
-### HOCs
-
-Use descriptive **camelCase** names:
-
-```text
-withPortal.js
-withPagination.js
-```
-
-### Constants
-
-For grouped modules, `index.js` is allowed:
-
-```text
-constants/index.js
-```
-
-If the constants become too large, split them into explicit files:
-
-```text
-constants/dataTitles.constant.js
-constants/portalPositions.constant.js
-```
-
 ### Styles
 
-Styles should match the owning component or module whenever practical:
+Match the owning component or module whenever practical:
 
 ```text
 FilterButton.module.scss
@@ -155,12 +79,12 @@ Pagination.module.scss
 
 ### Tests
 
-Tests should match the owning module name:
+Match the owning module name:
 
 ```text
-FilterButton.test.js
-FilterButton.generative.test.js
-Pagination.test.js
+something.helper.test.js
+FilterButton.test.jsx
+FilterButton.generative.test.jsx
 ```
 
 Avoid names like:
@@ -171,12 +95,10 @@ index.test.js
 
 ### Stories, fixtures and examples
 
-Use the owning module name as the base:
-
 ```text
-FilterButton.stories.js
-FilterButton.fixture.js
-FilterButton.autofix.js
+FilterButton.stories.jsx
+FilterButton.fixture.jsx
+FilterButton.autofix.jsx
 ```
 
 ## Folder Structure Rules
@@ -209,52 +131,39 @@ components/
 
 ## `index.js` Usage Rules
 
-### Allowed
+Used only for:
+- package/folder entrypoint
+- grouped exports
+- barrel files
+- public API aggregation
 
-Use `index.js` for:
+Preferred:
+```text
+filter-button/
+	index.js
+	FilterButton.jsx
+	FilterButton.module.scss
+	FilterButton.test.jsx
+```
+```text
+portal-container/
+	index.ts
+	PortalContainer.tsx
+	PortalContainer.module.scss
+	PortalContainer.test.tsx
+```
 
-1. folder barrel files
-2. package entrypoints
-3. grouped exports
-4. public API boundaries
+Discouraged:
+```text
+filter-button/
+	index.js
+```
 
 Example folder barrel:
 
 ```javascript
 export { default } from './FilterButton';
 export * from './FilterButton';
-```
-
-### Discouraged
-
-Do not use `index.js` as the only implementation file for components and containers when the file is the real implementation.
-
-Why:
-
-- poor IDE tab readability
-- low filename search value
-- noisier grep and changed-file lists
-- less readable stack traces
-- harder refactoring
-
-## Import Rules
-
-### External imports
-
-Consumers should usually import from the folder path:
-
-```javascript
-import FilterButton from './filter-button';
-```
-
-This keeps imports short and stable.
-
-### Internal imports
-
-Inside a folder or during refactors, explicit file imports are acceptable:
-
-```javascript
-import FilterButton from './FilterButton';
 ```
 
 ## Symbols
@@ -282,8 +191,8 @@ import FilterButton from './FilterButton';
 
 | Type             | Directory                   | File                            |
 |------------------|-----------------------------|---------------------------------|
-| Component        | kebab-case                  | PascalCase.js                   |
-| Container        | kebab-case                  | PascalCase.js                   |
+| Component        | kebab-case                  | PascalCase.jsx                  |
+| Container        | kebab-case                  | PascalCase.jsx                  |
 | Hook             | grouped folder or direct    | useSomething.js                 |
 | SDK              | grouped folder or direct    | camelCase.sdk.js                |
 | Controller       | grouped folder or direct    | camelCase.controller.js         |
@@ -293,60 +202,36 @@ import FilterButton from './FilterButton';
 | Manager          | grouped folder or direct    | camelCase.manager.js            |
 | Mapper           | grouped folder or direct    | camelCase.mapper.js             |
 | Service          | grouped folder or direct    | camelCase.service.js            |
-| Context          | grouped folder or direct    | PascalCase.context.js           |
+| Context          | grouped folder or direct    | camelCase.context.js            |
+| Provider         | grouped folder or direct    | camelCase.provider.js           |
 | Constant         | grouped folder or direct    | camelCase.constant.js           |
-| HOC              | grouped folder or direct    | withSomething.hoc.js            |
+| HOC              | grouped folder or direct    | camelCase.hoc.js                |
 | store/action-reg | grouped folder or direct    | camelCase.actionRegistration.js |
 | store/middleware | grouped folder or direct    | camelCase.middleware.js         |
 | store/reducer    | grouped folder or direct    | camelCase.reducer.js            |
 | store/selector   | grouped folder or direct    | camelCase.selector.js           |
 | Style            | same folder as owner        | OwnerName.module.scss           |
-| Test             | same folder as owner        | OwnerName.test.js               |
-| Generative test  | same folder as owner        | OwnerName.generative.test.js    |
+| Test             | same folder as owner        | OwnerName.test.jsx              |
+| Generative test  | same folder as owner        | OwnerName.generative.test.jsx   |
 | Barrel           | folder root                 | index.js                        |
 | Package entry    | package root or `src/` root | index.js                        |
 
 ## Preferred Patterns
-
-### Component with styles and tests
-
-```text
-filter-button/
-	index.js
-	FilterButton.js
-	FilterButton.module.scss
-	FilterButton.test.js
-```
 
 ### Complex container
 
 ```text
 portal-container/
 	index.js
-	PortalContainer.js
+	PortalContainer.jsx
 	PortalContainer.module.scss
 	helpers/
-		portalPositionHelper.js
+		portalPosition.helper.js
 	hooks/
 		usePortalPosition.js
 	__tests__/
-		PortalContainer.test.js
-		PortalContainer.generative.test.js
-```
-
-### Utilities/Modules collection
-
-```text
-hooks/
-	useList.js
-	usePaging.js
-	useVirtualList.js
-	index.js
-helpers/
-	global.helper.js
-	filter.helper.js
-	list.helper.js
-	index.js
+		PortalContainer.test.jsx
+		PortalContainer.generative.test.jsx
 ```
 
 ## Edge Cases
@@ -357,39 +242,16 @@ Private subcomponents should still use explicit filenames:
 
 ```text
 pagination/
-	Pagination.js
+	Pagination.jsx
 	components/
-		PageButton.js
-		PageSizeSelect.js
+		PageButton.jsx
+		PageSizeSelect.jsx
 ```
 
 ### Modifier and helper files
 
-Avoid redundant names like:
-
+Discouraged:
 ```text
 FilterButtonComponent.js
 FilterButtonStyles.module.scss
 ```
-
-Prefer:
-
-```text
-FilterButton.js
-FilterButton.module.scss
-```
-
-## Repo Policy Statement
-
-The project standard is:
-
-> Use explicit names for implementation files and reserve `index.js` for entrypoints and barrel files.
-
-This gives the project:
-
-- better IDE tab readability
-- better filename search
-- clearer diffs and stack traces
-- cleaner public import paths
-- safer gradual refactoring
-
