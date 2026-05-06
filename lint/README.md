@@ -28,18 +28,18 @@ Install lint dependencies from the repo root:
 npm i -D @babel/core@7.27.1 @babel/eslint-parser@7.28.6 @eslint/js@9.39.4 eslint@9.39.4 eslint-plugin-import@2.32.0 eslint-plugin-react@7.37.5 eslint-plugin-react-hooks@5.2.0 globals@15.15.0 stylelint@15.11.0 stylelint-config-standard-scss@10.0.0 stylelint-scss@5.3.2 stylelint-stylistic@0.4.5 postcss-scss@4.0.9 --legacy-peer-deps
 ```
 
-### Webstorm setup
+### WebStorm setup
 
 #### JS:
 
-1. Open Webstorm settings
+1. Open WebStorm settings
 2. Go to `Languages & Frameworks > JavaScript > Code Quality Tools > ESLint`
 3. Check the `Automatic ESLint configuration` checkbox
 4. Run for files: `**/*.{js,ts,jsx,tsx,cjs,cts,mjs,mts,html,vue}`
 
 ### CSS/SCSS:
 
-1. Open Webstorm settings
+1. Open WebStorm settings
 2. Go to `Languages & Frameworks > Style Sheets > Stylelint`
 3. Check the `Enable` checkbox
 4. Stylelint package: Should be automatically selected from `node_modules/stylelint`

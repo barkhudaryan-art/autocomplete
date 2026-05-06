@@ -25,11 +25,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# Claude Code local settings
-.claude
-CLAUDE.md
-.gemini
-.geminiignore
-GEMINI.md
-.github
-instructions
