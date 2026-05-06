@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm *)",
+      "PowerShell(npm.cmd --version)",
+      "PowerShell(Test-Path *)",
+      "PowerShell(ssh-keygen *)",
+      "PowerShell(ssh -T -o StrictHostKeyChecking=accept-new git@github-autocomplete)"
+    ]
+  }
+}
