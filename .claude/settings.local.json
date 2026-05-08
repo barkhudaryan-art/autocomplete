@@ -5,7 +5,10 @@
       "PowerShell(npm.cmd --version)",
       "PowerShell(Test-Path *)",
       "PowerShell(ssh-keygen *)",
-      "PowerShell(ssh -T -o StrictHostKeyChecking=accept-new git@github-autocomplete)"
+      "PowerShell(ssh -T -o StrictHostKeyChecking=accept-new git@github-autocomplete)",
+      "Bash(npx eslint *)",
+      "Bash(npm ls *)",
+      "Bash(npm install *)"
     ]
   }
 }

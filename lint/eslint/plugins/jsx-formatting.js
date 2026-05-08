@@ -3,7 +3,7 @@
  * Follow the `JSX rules` in `lint/README.md`
  */
 
-module.exports = {
+export default {
 	meta: {
 		type: 'layout',
 		fixable: 'whitespace',
