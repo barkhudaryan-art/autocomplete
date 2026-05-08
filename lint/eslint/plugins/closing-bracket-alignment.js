@@ -66,6 +66,84 @@ module.exports = {
 			};
 		}
 
+		function getFunctionParenTokens( node ) {
+			if ( !node.body ) {
+				return null;
+			}
+
+			const bodyStart = sourceCode.getFirstToken( node.body );
+			const closeParen = bodyStart
+				? sourceCode.getTokenBefore( bodyStart, { filter: token => token.value === ')' } )
+				: null;
+			const openParen = closeParen
+				? sourceCode.getTokenBefore( closeParen, { filter: token => token.value === '(' } )
+				: null;
+
+			if ( !openParen || !closeParen ) {
+				return null;
+			}
+
+			return {
+				openParen,
+				closeParen
+			};
+		}
+
+		function checkEmptyFunctionParens( node ) {
+			if ( isInsideJSX( node ) || node.params.length !== 0 ) {
+				return;
+			}
+
+			const parenTokens = getFunctionParenTokens( node );
+			if ( !parenTokens ) {
+				return;
+			}
+
+			const { openParen, closeParen } = parenTokens;
+			const between = sourceCode.text.slice( openParen.range[1], closeParen.range[0] );
+
+			if ( between === ' ' ) {
+				context.report( {
+					node,
+					loc: {
+						start: openParen.loc.start,
+						end: closeParen.loc.end
+					},
+					message: "Empty function parameter lists must not contain spaces between '(' and ')'.",
+					fix( fixer ) {
+						return fixer.replaceTextRange( [openParen.range[1], closeParen.range[0]], '' );
+					}
+				} );
+			}
+		}
+
+		function checkEmptyFunctionBodySpacing( node ) {
+			if ( isInsideJSX( node ) || !node.body || node.body.type !== 'BlockStatement' || node.body.body.length > 0 ) {
+				return;
+			}
+
+			const bodyText = sourceCode.getText( node.body );
+			if ( bodyText !== '{ }' ) {
+				return;
+			}
+
+			const openBrace = sourceCode.getFirstToken( node.body, { filter: token => token.value === '{' } );
+			const closeBrace = sourceCode.getLastToken( node.body, { filter: token => token.value === '}' } );
+
+			if ( !openBrace || !closeBrace ) {
+				return;
+			}
+
+			context.report( {
+				node: node.body,
+				loc: node.body.loc,
+				message: "Empty function bodies must not contain spaces between '{' and '}'.",
+				fix( fixer ) {
+					return fixer.replaceTextRange( [openBrace.range[1], closeBrace.range[0]], '' );
+				}
+			} );
+		}
+
 		return {
 			'Program:exit'( node ) {
 				// Handled by jsx-formatting
@@ -349,8 +427,7 @@ module.exports = {
 							message: `Closing '${token.value}' should be on the same line as the previous closing bracket.`,
 							fix( fixer ) {
 								return gaps.map( ( gap ) =>
-									fixer.replaceTextRange( [gap.start, gap.end], ' ' )
-								);
+									fixer.replaceTextRange( [gap.start, gap.end], ' ' ) );
 							}
 						} );
 						continue;
@@ -498,8 +575,7 @@ module.exports = {
 						message: 'Closing brackets on this line need to be split across lines to match their opener indentation.',
 						fix( fixer ) {
 							return splits.map( ( s ) =>
-								fixer.replaceTextRange( [s.gapStart, s.gapEnd], '\n' + s.newIndent )
-							);
+								fixer.replaceTextRange( [s.gapStart, s.gapEnd], '\n' + s.newIndent ) );
 						}
 					} );
 				}
@@ -651,6 +727,21 @@ module.exports = {
 						}
 					} );
 				}
+			},
+
+			FunctionDeclaration( node ) {
+				checkEmptyFunctionParens( node );
+				checkEmptyFunctionBodySpacing( node );
+			},
+
+			FunctionExpression( node ) {
+				checkEmptyFunctionParens( node );
+				checkEmptyFunctionBodySpacing( node );
+			},
+
+			ArrowFunctionExpression( node ) {
+				checkEmptyFunctionParens( node );
+				checkEmptyFunctionBodySpacing( node );
 			}
 		};
 	}

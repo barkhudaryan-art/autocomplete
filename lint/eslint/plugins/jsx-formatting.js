@@ -610,8 +610,7 @@ ${children}${eol}${baseIndent}</>`;
 			const hasJSXChild = significantChildren.some( child => child.type === 'JSXElement' || child.type === 'JSXFragment' );
 			const hasComplexExpression = significantChildren.some( child =>
 				child.type === 'JSXExpressionContainer' &&
-				!isSimpleInlineExpressionContainer( child )
-			);
+				!isSimpleInlineExpressionContainer( child ) );
 			const inlineText = significantChildren.map( formatInlineChild ).join( '' );
 
 			if (
@@ -824,6 +823,36 @@ ${children}${eol}${baseIndent}</>`;
 				return;
 			}
 
+			function getAttributeName( attr ) {
+				if ( attr?.name?.type === 'JSXIdentifier' ) {
+					return attr.name.name;
+				}
+
+				return attr?.name ? getSourceSlice( attr.name ) : 'attribute';
+			}
+
+			function getObjectPropertyName( prop ) {
+				if ( !prop ) {
+					return 'property';
+				}
+
+				if ( prop.type === 'Property' ) {
+					if ( prop.key?.type === 'Identifier' ) {
+						return prop.key.name;
+					}
+
+					if ( prop.key ) {
+						return getSourceSlice( prop.key ).trim();
+					}
+				}
+
+				if ( prop.type === 'SpreadElement' && prop.argument ) {
+					return `...${getSourceSlice( prop.argument ).trim()}`;
+				}
+
+				return getSourceSlice( prop ).trim();
+			}
+
 			for ( const attr of openingEl.attributes ) {
 				const attrLineText = getLineText( attr );
 				const attrLineWidth = getLineWidth( attrLineText );
@@ -838,7 +867,7 @@ ${children}${eol}${baseIndent}</>`;
 					continue;
 				}
 
-				const attrName = attr.name.name;
+				const attrName = getAttributeName( attr );
 				const value = attr.value;
 				const expression = value && value.type === 'JSXExpressionContainer' ? value.expression : null;
 				const props = expression?.properties;
@@ -849,7 +878,7 @@ ${children}${eol}${baseIndent}</>`;
 					if ( propRaw.length > maxLength ) {
 						context.report( {
 							node: prop,
-							message: `Property name in ObjectExpression too long: ${prop.key.name}`
+							message: `Property name in ObjectExpression too long: ${getObjectPropertyName( prop )}`
 						} );
 					}
 					return propIndent + propRaw.trim();
@@ -1158,8 +1187,7 @@ ${children}${eol}${baseIndent}</>`;
 
 			const hasJSXChild = significantChildren.some( child => child.type === 'JSXElement' || child.type === 'JSXFragment' );
 			const hasComplexChildExpression = significantChildren.some( child =>
-				child.type === 'JSXExpressionContainer' && !isSimpleInlineExpressionContainer( child )
-			);
+				child.type === 'JSXExpressionContainer' && !isSimpleInlineExpressionContainer( child ) );
 			const isNodeSingleLine = node.loc.start.line === node.loc.end.line;
 			const openingEl = node.type === 'JSXElement' ? node.openingElement : null;
 			const closingEl = node.type === 'JSXElement' ? node.closingElement : null;

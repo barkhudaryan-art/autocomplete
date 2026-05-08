@@ -233,6 +233,21 @@ function EslintTest() {
 	ObjectVariable = { };
 	// INVALID: empty space between parens
 	FunctionVariable( );
+
+	// INVALID: empty space between parens
+	function someFN3( ) {
+		// do something
+	}
+
+	// INVALID, INVALID, INVALID, INVALID, INVALID: 
+	// empty space between parens and between empty curly braces (function body)
+	FunctionVariable = ( ) => {
+		ObjectVariable = {
+			someFN: ( ) => { },
+			someFN2( ) { },
+			someFN3
+		};
+	};
 	// INVALID: empty space between brackets
 	ArrayVariable = [ ];
 	// INVALID: tab character used for alignment between tokens
