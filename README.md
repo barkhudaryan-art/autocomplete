@@ -22,8 +22,8 @@ Each phase ends with a working, committed checkpoint. Don't skip ahead — earli
 - [X] Three-file `tsconfig` split (`tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`)
 - [X] Swap to `typescript-eslint` parser for `.ts`/`.tsx`
 - [X] Add `npm run typecheck` script
-- [ ] Install Tailwind CSS, retire SCSS
-- [ ] Define a tiny token layer (colors, radii, spacing scale) in Tailwind config
+- [X] Install Tailwind CSS, retire SCSS
+- [X] Define a tiny token layer (colors, radii, spacing scale) in Tailwind config
 
 ### Phase 2 — Component skeleton
 - [ ] Static `<Autocomplete>` UI: input, list container, option rows
@@ -79,7 +79,7 @@ Track open questions, decisions, and links to docs as you go — keep them in th
 
 ### Decisions log
 
-_(empty — fill as you make choices)_
+- Create the Tailwind Config later?
 
 ### Open questions
 

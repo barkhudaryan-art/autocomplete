@@ -13,11 +13,6 @@ lint/
     eslint-test.js         # JSX rule playground / manual checks
     fixtures/              # ESLint custom-rule fixtures and autofix samples
     plugins/               # custom ESLint rules
-  stylelint/
-    stylelint.config.cjs   # main Stylelint config
-    .stylelintignore       # Stylelint ignore file for CLI usage
-    ignore-patterns.cjs    # shared ignore patterns for config/editor usage
-    plugins/               # custom Stylelint rules
 ```
 
 ## Installation
@@ -25,7 +20,7 @@ lint/
 Install lint dependencies from the repo root:
 
 ```bash
-npm i -D @babel/core@7.27.1 @babel/eslint-parser@7.28.6 @eslint/js@9.39.4 eslint@9.39.4 eslint-plugin-import@2.32.0 eslint-plugin-react@7.37.5 eslint-plugin-react-hooks@5.2.0 globals@15.15.0 stylelint@15.11.0 stylelint-config-standard-scss@10.0.0 stylelint-scss@5.3.2 stylelint-stylistic@0.4.5 postcss-scss@4.0.9 --legacy-peer-deps
+npm i -D @babel/core@7.27.1 @babel/eslint-parser@7.28.6 @eslint/js@9.39.4 eslint@9.39.4 eslint-plugin-import@2.32.0 eslint-plugin-react@7.37.5 eslint-plugin-react-hooks@5.2.0 globals@15.15.0 --legacy-peer-deps
 ```
 
 ### WebStorm setup
@@ -37,21 +32,12 @@ npm i -D @babel/core@7.27.1 @babel/eslint-parser@7.28.6 @eslint/js@9.39.4 eslint
 3. Check the `Automatic ESLint configuration` checkbox
 4. Run for files: `**/*.{js,ts,jsx,tsx,cjs,cts,mjs,mts,html,vue}`
 
-### CSS/SCSS:
-
-1. Open WebStorm settings
-2. Go to `Languages & Frameworks > Style Sheets > Stylelint`
-3. Check the `Enable` checkbox
-4. Stylelint package: Should be automatically selected from `node_modules/stylelint`
-5. Configuration File: path to the `.stylelintrc.cjs` in the project
-6. Run for files: `**/*.{css,scss}`
-
 ### Hot Key (Optional)
 
 1. Go to `Keymap`
 2. Type "lint" in search bar
-3. Select `Fix {ESLint|Stylelint} Problems`
-4. Set the desired hotkey, both keys can be the same for ESLint and Stylelint (e.g., `Ctrl + Alt + L`)
+3. Select `Fix ESLint Problems`
+4. Set the desired hotkey, both keys can be the same for ESLint (e.g., `Ctrl + Alt + L`)
 
 ## Usage
 
@@ -78,15 +64,9 @@ npm run lint:styles
 npm run lint:styles:fix
 ```
 
-Direct config usage:
-
-```bash
-npx stylelint --config lint/stylelint/stylelint.config.cjs --ignore-path lint/stylelint/.stylelintignore "packages/**/*.{css,scss}"
-```
-
 ## Root shims
 
-The root `eslint.config.mjs` and `.stylelintrc.cjs` stay in place as thin shims so editor auto-discovery continues to work.
+The root `eslint.config.mjs` stay in place as thin shims so editor auto-discovery continues to work.
 
 ## ESLint custom rules
 
@@ -157,35 +137,10 @@ Use `lint/eslint/fixtures/` for stable regression samples:
 - `*.fixture.js` for inputs / valid examples
 - `*.autofix.js` for expected autofix outputs
 
-## Stylelint custom rules
-
-Custom Stylelint rules live in `lint/stylelint/plugins/`.
-
-Current custom rule set includes:
-- `selector-list-formatting`
-- `multiline-value-formatting`
-
-### Important CSS / SCSS formatting rules
-
-- Tabs for indentation
-- One empty line between multiline rules / blocks
-- One space before `{`
-- Max line length target: 150
-- Vendor-prefixed properties are allowed
-
-### Selector list rules
-
-The custom `selector-list-formatting` rule enforces:
-- selector collections stay valid in single-line or multiline form
-- no forced collapse from multiline to single-line
-- one space after a comma when the next selector stays on the same line
-- no required space after a comma when the selector continues on the next line
-- wrap long selector collections by max length instead of one-selector-per-line
-
 ## Notes for maintenance
 
 When editing lint rules:
-1. update the rule in `lint/eslint/plugins/` or `lint/stylelint/plugins/`
+1. update the rule in `lint/eslint/plugins/`
 2. verify against the playground / fixtures
 3. run both root lint commands
 4. keep the root shims minimal
