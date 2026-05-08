@@ -1,4 +1,3 @@
-/* eslint-env node */
 /* global __dirname */
 const path = require( 'path' );
 const ignoreFiles = require( './ignore-patterns.cjs' );

@@ -18,10 +18,10 @@ A deliberately scoped learning project: autocomplete dropdown component
 Each phase ends with a working, committed checkpoint. Don't skip ahead — earlier phases set up the ground each later phase stands on.
 
 ### Phase 1 — Foundation
-- [ ] Migrate JS/JSX → TypeScript (strict mode)
-- [ ] Three-file `tsconfig` split (`tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`)
-- [ ] Swap to `typescript-eslint` parser for `.ts`/`.tsx`
-- [ ] Add `npm run typecheck` script
+- [X] Migrate JS/JSX → TypeScript (strict mode)
+- [X] Three-file `tsconfig` split (`tsconfig.json`, `tsconfig.app.json`, `tsconfig.node.json`)
+- [X] Swap to `typescript-eslint` parser for `.ts`/`.tsx`
+- [X] Add `npm run typecheck` script
 - [ ] Install Tailwind CSS, retire SCSS
 - [ ] Define a tiny token layer (colors, radii, spacing scale) in Tailwind config
 
