@@ -23,12 +23,12 @@ row-action/
 
 ## File Naming by Type
 
-### React components and containers: PascalCase.jsx or PascalCase.tsx
+### React components and containers: PascalCase.tsx or PascalCase.tsx
 
 file name and exported component names should match
 
 ```text
-FilterButton.jsx
+FilterButton.tsx
 PortalContainer.tsx
 ```
 
@@ -46,24 +46,24 @@ export default React.memo( FilterButton );
 - the file name should match the exported hook name
 
 ```text
-usePortalPosition.js
-useVirtualList.js
-useOnOutsideClick.js
+usePortalPosition.ts
+useVirtualList.ts
+useOnOutsideClick.ts
 ```
 
 ### Utilities
 
-**camelCase.{utility name}.js**:
+**camelCase.{utility name}.ts**:
 
 ```text
-global.helper.js
-sport.mapper.js
-filter.constant.js
-region.controller.js
-competition.selector.js
-withPortal.hoc.js
-portal.context.js
-portal.provider.js
+global.helper.ts
+sport.mapper.ts
+filter.constant.ts
+region.controller.ts
+competition.selector.ts
+withPortal.hoc.ts
+portal.context.ts
+portal.provider.ts
 ```
 
 If the helper is a singleton or module object, the file name should still reflect the exported symbol.
@@ -82,23 +82,23 @@ Pagination.module.scss
 Match the owning module name:
 
 ```text
-something.helper.test.js
-FilterButton.test.jsx
-FilterButton.generative.test.jsx
+something.helper.test.ts
+FilterButton.test.tsx
+FilterButton.generative.test.tsx
 ```
 
 Avoid names like:
 
 ```text
-index.test.js
+index.test.ts
 ```
 
 ### Stories, fixtures and examples
 
 ```text
-FilterButton.stories.jsx
-FilterButton.fixture.jsx
-FilterButton.autofix.jsx
+FilterButton.stories.tsx
+FilterButton.fixture.tsx
+FilterButton.autofix.tsx
 ```
 
 ## Folder Structure Rules
@@ -111,7 +111,7 @@ Preferred:
 
 ```text
 components/
-	Loader.js
+	Loader.ts
 ```
 
 ### Multi-file modules
@@ -123,13 +123,13 @@ Preferred:
 ```text
 components/
 	filter-button/
-		index.js
-		FilterButton.js
+		index.ts
+		FilterButton.ts
 		FilterButton.module.scss
-		FilterButton.test.js
+		FilterButton.test.ts
 ```
 
-## `index.js` Usage Rules
+## `index.ts` Usage Rules
 
 Used only for:
 - package/folder entrypoint
@@ -140,10 +140,10 @@ Used only for:
 Preferred:
 ```text
 filter-button/
-	index.js
-	FilterButton.jsx
+	index.ts
+	FilterButton.tsx
 	FilterButton.module.scss
-	FilterButton.test.jsx
+	FilterButton.test.tsx
 ```
 ```text
 portal-container/
@@ -156,7 +156,7 @@ portal-container/
 Discouraged:
 ```text
 filter-button/
-	index.js
+	index.ts
 ```
 
 Example folder barrel:
@@ -191,30 +191,30 @@ export * from './FilterButton';
 
 | Type             | Directory                   | File                            |
 |------------------|-----------------------------|---------------------------------|
-| Component        | kebab-case                  | PascalCase.jsx                  |
-| Container        | kebab-case                  | PascalCase.jsx                  |
-| Hook             | grouped folder or direct    | useSomething.js                 |
-| SDK              | grouped folder or direct    | camelCase.sdk.js                |
-| Controller       | grouped folder or direct    | camelCase.controller.js         |
-| BL               | grouped folder or direct    | camelCase.bl.js                 |
-| Enum             | grouped folder or direct    | camelCase.enum.js               |
-| Helper           | grouped folder or direct    | camelCase.helper.js             |
-| Manager          | grouped folder or direct    | camelCase.manager.js            |
-| Mapper           | grouped folder or direct    | camelCase.mapper.js             |
-| Service          | grouped folder or direct    | camelCase.service.js            |
-| Context          | grouped folder or direct    | camelCase.context.js            |
-| Provider         | grouped folder or direct    | camelCase.provider.js           |
-| Constant         | grouped folder or direct    | camelCase.constant.js           |
-| HOC              | grouped folder or direct    | camelCase.hoc.js                |
-| store/action-reg | grouped folder or direct    | camelCase.actionRegistration.js |
-| store/middleware | grouped folder or direct    | camelCase.middleware.js         |
-| store/reducer    | grouped folder or direct    | camelCase.reducer.js            |
-| store/selector   | grouped folder or direct    | camelCase.selector.js           |
+| Component        | kebab-case                  | PascalCase.tsx                  |
+| Container        | kebab-case                  | PascalCase.tsx                  |
+| Hook             | grouped folder or direct    | useSomething.ts                 |
+| SDK              | grouped folder or direct    | camelCase.sdk.ts                |
+| Controller       | grouped folder or direct    | camelCase.controller.ts         |
+| BL               | grouped folder or direct    | camelCase.bl.ts                 |
+| Enum             | grouped folder or direct    | camelCase.enum.ts               |
+| Helper           | grouped folder or direct    | camelCase.helper.ts             |
+| Manager          | grouped folder or direct    | camelCase.manager.ts            |
+| Mapper           | grouped folder or direct    | camelCase.mapper.ts             |
+| Service          | grouped folder or direct    | camelCase.service.ts            |
+| Context          | grouped folder or direct    | camelCase.context.ts            |
+| Provider         | grouped folder or direct    | camelCase.provider.ts           |
+| Constant         | grouped folder or direct    | camelCase.constant.ts           |
+| HOC              | grouped folder or direct    | camelCase.hoc.ts                |
+| store/action-reg | grouped folder or direct    | camelCase.actionRegistration.ts |
+| store/middleware | grouped folder or direct    | camelCase.middleware.ts         |
+| store/reducer    | grouped folder or direct    | camelCase.reducer.ts            |
+| store/selector   | grouped folder or direct    | camelCase.selector.ts           |
 | Style            | same folder as owner        | OwnerName.module.scss           |
-| Test             | same folder as owner        | OwnerName.test.jsx              |
-| Generative test  | same folder as owner        | OwnerName.generative.test.jsx   |
-| Barrel           | folder root                 | index.js                        |
-| Package entry    | package root or `src/` root | index.js                        |
+| Test             | same folder as owner        | OwnerName.test.tsx              |
+| Generative test  | same folder as owner        | OwnerName.generative.test.tsx   |
+| Barrel           | folder root                 | index.ts                        |
+| Package entry    | package root or `src/` root | index.ts                        |
 
 ## Preferred Patterns
 
@@ -222,16 +222,16 @@ export * from './FilterButton';
 
 ```text
 portal-container/
-	index.js
-	PortalContainer.jsx
+	index.ts
+	PortalContainer.tsx
 	PortalContainer.module.scss
 	helpers/
-		portalPosition.helper.js
+		portalPosition.helper.ts
 	hooks/
-		usePortalPosition.js
+		usePortalPosition.ts
 	__tests__/
-		PortalContainer.test.jsx
-		PortalContainer.generative.test.jsx
+		PortalContainer.test.tsx
+		PortalContainer.generative.test.tsx
 ```
 
 ## Edge Cases
@@ -242,16 +242,16 @@ Private subcomponents should still use explicit filenames:
 
 ```text
 pagination/
-	Pagination.jsx
+	Pagination.tsx
 	components/
-		PageButton.jsx
-		PageSizeSelect.jsx
+		PageButton.tsx
+		PageSizeSelect.tsx
 ```
 
 ### Modifier and helper files
 
 Discouraged:
 ```text
-FilterButtonComponent.js
+FilterButtonComponent.ts
 FilterButtonStyles.module.scss
 ```

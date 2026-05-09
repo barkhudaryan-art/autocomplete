@@ -9,7 +9,7 @@ packages/<name>/src/
   constants/     # Centralized constants
   hoc/           # Higher-order components
   __tests__/     # Package-level tests
-  index.js       # Entry / barrel
+  index.ts       # Entry / barrel
 ```
 
 Naming: see `NAMING_CONVENTIONS.md`.
