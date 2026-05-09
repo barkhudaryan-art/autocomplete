@@ -89,4 +89,13 @@ _(empty — fill as you hit them)_
 
 Short, dated entries — what got done, what blocked you. One or two lines is enough.
 
-_(empty — start once Phase 1 begins)_
+Day 1
+### Phase - 1 - DONE
+- Migrated to TypeScript: configs, ESLint, vite configs
+- Installed Tailwind CSS: index.css holds main colors/themes
+
+Day 2
+### Phase - 2 - IN PROGRESS
+- unnecessary react stuff removed
+- Created Input/Dropdown components, dropdown types
+- TypeScript syntax handling attempts

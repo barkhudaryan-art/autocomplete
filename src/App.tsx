@@ -49,12 +49,26 @@ function generateUsers( count = 10 ) {
 
 	return Array.from( { length: count }, ( _, index ) => ( {
 		id: index + 1,
-		name: names[Math.floor( Math.random() * names.length )],
+		name: names[Math.floor( Math.random() * names.length )] ?? 'Unknown',
 		age: Math.floor( Math.random() * 50 ) + 18
 	} ) );
 }
 
-const MOCK_ARRAY = generateUsers( 50 );
+interface User {
+	id: number;
+	name: string;
+	age: number;
+}
+
+const MOCK_ARRAY: User[] = generateUsers( 50 );
+
+function filterUsers( query: string, users: User[] ): User[] {
+	return users.filter( user => {
+		const foundName = user.name.toLowerCase().includes( query.toLowerCase() );
+		const foundAge = Number.isFinite( +query ) ? user.age === +query : false;
+		return foundName || foundAge;
+	} );
+}
 
 function App() {
 	const [searchValue, setSearchValue] = useState( '' );
@@ -62,13 +76,9 @@ function App() {
 	const searchChangeHandler = ( value: string ) => {
 		setSearchValue( value );
 	};
-	const filteredArray = MOCK_ARRAY.filter( user => {
-		const foundName = user.name?.toLowerCase().includes( searchValue.toLowerCase() );
-		const foundAge = Number.isFinite( +searchValue ) ? user.age === +searchValue : false;
-		return !!foundName || foundAge;
-	} );
+	const filteredArray = filterUsers( searchValue, MOCK_ARRAY );
 
-	return <div className='pt-15 px-5 h-full'>
+	return <div className='pt-15 px-5 h-full relative'>
 		<Input
 			id={'autocomplete'}
 			placeholder={'Search...'}
@@ -76,7 +86,7 @@ function App() {
 			onChange={searchChangeHandler}
 		/>
 		<div
-			className='flex flex-col items-center justify-center'
+			className='overflow-auto h-[calc(100%-40px)]'
 		>
 			{
 				filteredArray.length > 0
@@ -84,7 +94,7 @@ function App() {
 						return (
 							<div
 								key={user.id}
-								className={'py-1 w-full flex items-center justify-center border-border border-b'}
+								className={'py-1 w-full h-10 flex items-center border-border border-b'}
 							>
 								{user.name} - {user.age}
 							</div>

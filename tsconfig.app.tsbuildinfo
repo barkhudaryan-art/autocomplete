@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts"],"version":"6.0.3"}
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/dropdown/dropdown.tsx","./src/components/dropdown/dropdown.types.ts","./src/components/dropdown/index.ts","./src/components/dropdown/option/option.tsx","./src/components/dropdown/option/index.ts","./src/components/input/input.tsx","./src/components/input/index.ts"],"errors":true,"version":"6.0.3"}

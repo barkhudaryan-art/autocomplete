@@ -27,10 +27,11 @@ function Input( props: InputProps ) {
 		>
 			<input
 				id={id}
-				type="text"
+				type={'text'}
+				role={'combobox'}
 				placeholder={placeholder ?? ''}
 				value={value}
-				className={'w-full outline-none '}
+				className={'w-full outline-none'}
 				onChange={changeHandler}
 			/>
 		</label>
