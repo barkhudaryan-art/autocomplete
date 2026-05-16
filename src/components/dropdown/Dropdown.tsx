@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
+import type { DropdownItem, DropdownStatus } from './dropdown.types';
 
 import Option from './option';
-
-import type { DropdownItem, DropdownStatus } from './dropdown.types.ts';
 
 
 interface DropdownProps<T extends DropdownItem> {

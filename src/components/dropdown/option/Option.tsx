@@ -1,6 +1,5 @@
-import { type MouseEvent, type ReactNode } from 'react';
-
-import type { DropdownItem } from '../dropdown.types.ts';
+import type { MouseEvent, ReactNode } from 'react';
+import type { DropdownItem } from '../dropdown.types';
 
 
 interface OptionProps<T extends DropdownItem> {
@@ -9,7 +8,7 @@ interface OptionProps<T extends DropdownItem> {
 	option: T;
 	isHighlighted: boolean;
 	render?: ( ( option: T ) => ReactNode ) | undefined;
-	onSelect?: ( ( option: T ) => void ) | undefined;
+	onSelect: ( ( option: T ) => void ) | undefined;
 	onHighlight?: ( ( option: T ) => void ) | undefined;
 }
 
