@@ -77,13 +77,27 @@ Each phase ends with a working, committed checkpoint. Don't skip ahead — earli
 
 Track open questions, decisions, and links to docs as you go — keep them in this section so future-you understands past-you.
 
+### TypeScript utility types cheatsheet
+- `<Pick>` lets you pick specific properties from an object without making them optional
+- `<Omit>` opposite of `<Pick>`, exclude the specified properties
+- `<Partial>` all properties are optional
+- `<Required>` all properties are required
+- `<Record>` define shape of any object, key value
+- `<Extract>` get the values from other unions, can be mixed
+- `<Exclude>` opposite of `<Extract>`
+- `<ReturnType>` get the shape of a function return as a type
+- `<Awaited>` get the shape of a promised function return as a type
+- `<Parameters>` get the shape of a function parameters as a type
+- `<ConstructorParameters>` get the shape of a class as a type
+
 ### Decisions log
 
 - Create the Tailwind Config later?
+- Learn TypeScript more before going any further
 
 ### Open questions
 
-_(empty — fill as you hit them)_
+- Vite updates the project on files change such as README.md or package.json.
 
 ## Daily log
 
@@ -99,3 +113,21 @@ Day 2
 - unnecessary react stuff removed
 - Created Input/Dropdown components, dropdown types
 - TypeScript syntax handling attempts
+
+Day 3
+### Phase 2 - IN PROGRESS
+- TypeScript
+
+| #     | Topic                                        | Anchor in code                              |
+|-------|----------------------------------------------|---------------------------------------------|
+| 1 - X | type vs interface                            | dropdown.types.ts lines 1 and 3             |
+| 2 - X | Literal types & union types                  | 'idle' \| 'loading' \| 'success' \| 'error' |
+| 3 - X | Function types as values, and void           | onSelect: ( option: T ) => void             |
+| 4 - X | Type-only imports                            | import type { ReactNode }                   |
+| 5 - X | Optional properties under strict flags       | prop?: T vs prop?: T \| undefined           |
+| 6     | Generics — the big one                       | <T extends DropdownItem>                    |
+| 7     | Indexed access types                         | highlightedId?: T['id']                     |
+| 8     | Explicit JSX type arguments                  | <Option<T> ... />                           |
+| 9     | Variance (contravariance of function params) | Why the last error happened                 |
+
+- Topics 1, 2, 3, 4, 5
